@@ -25,27 +25,13 @@
   <distill-header></distill-header>
   <d-front-matter>
     <script id='distill-front-matter' type="text/json">{
-    "title": "Why Momentum Really Works",
-    "description": "Although \" extremely useful for visualizing high-dimensional data, t-SNE plots can sometimes be mysterious or misleading.",
-    "published": "Jan 10, 2017",
+    "title": "Introduction to Reinforcement Learning",
+    "description": "Basics of Reinforcement Learning",
+    "published": "Jul 13, 2021",
     "authors": [
       {
-        "author":"Chris Olah",
-        "authorURL":"https://colah.github.io/",
-        "affiliations": [{"name": "Google Brain"}]
-      },
-      {
-        "author":"Ludwig Schubert",
-        "authorURL":"https://shancarter.com/",
-        "affiliations": [{"name": "Google Brain", "url": "https://g.co/brain"}]
-      },
-      {
-        "author":"Shan Carter",
-        "authorURL":"https://shancarter.com/",
-        "affiliations": [
-          {"name": "Google Brain", "url": "https://g.co/brain"},
-          {"name": "NYT", "url": "https://nytimes.com"}
-        ]
+        "author":"Thomas Bentham",
+        "authorURL":"https://tb-me.github.io/"
       }
     ],
     "katex": {
@@ -56,7 +42,7 @@
   }</script>
   </d-front-matter>
   <d-title>
-    <figure style="grid-column: page; margin: 1rem 0;"><img src="momentum.png"
+    <figure style="grid-column: page; margin: 1rem 0;"><img src="heading_image.png"
         style="width:100%; border: 1px solid rgba(0, 0, 0, 0.2);" /></figure>
     <p>We often think of Momentum<d-cite key="mercier2011humans"></d-cite> as a means of dampening oscillations and
       speeding up the iterations, leading to faster convergence. But it has other interesting behavior. It allows a
@@ -64,6 +50,26 @@
   </d-title>
   <d-byline></d-byline>
   <d-article>
+    <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
+    <h2>Introduction</h2>
+    <p>Reinforcement Learning at its core attempts to map states to a specific action in order to maximize a numerical reward. Unlike supervised learning, which is trained by comparing labelled data to predicted data, and un-supervised learning, which attempts to group unlabelled data together, reinforcement learning learns by maximizing its accumulative long term reward by interacting with the environment.</p>
+
+    <a class="marker" href="#section-1.1" id="section-1.1"><span>1.1</span></a>
+    <h3>Markov Decision Process (MDP)</h3>
+    <p>A Markov Decision Process provides a mathematical framework which can be used to model decision making and consists of the following:
+      <ul>
+        <li><em>Environment</em>: A scenario which accepts any of the possible actions from the set <d-math>\mathcal{A}</d-math> and returns a state (<d-math>s</d-math>) from within the set <d-math>\mathcal{S^+}</d-math></li>
+        <li><em>State (<d-math>s</d-math>)</em>: a tensor that can contain a set of vectors and/or scalars which are within the set <d-math>\mathcal{S^+}</d-math>. The state space can either be continuous or discrete. For discrete states, the set <d-math>\mathcal{S^+}</d-math> must contain a finite set of numbers. If the set <d-math>\mathcal{S^+}</d-math> contains a non-finite set of numbers, then the state space is continuous.</li>
+        <li><em>Reward (<d-math>r</d-math>)</em>: </li>
+        <li><em>Agent</em></li>
+        <li><em>Action (<d-math>a</d-math>)</em>: a tensor that can contain a set of vectors and/or scalars which are within the set <d-math>\mathcal{A}</d-math>. The action space is continuous when the set <d-math>\mathcal{A}</d-math> contains a non finite set of numbers, else if it contains a finite set of numbers, then the action space if discrete.</li>
+      </ul>
+    </p>
+
+
+
+
+
     <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
     <h2>A Brief Survey of Techniques</h2>
     <p>Before diving in: if you haven’t encountered t-SNE before, here’s what you need to know about the math behind it.
