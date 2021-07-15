@@ -44,33 +44,35 @@
   <d-title>
     <figure style="grid-column: page; margin: 1rem 0;"><img src="heading_image.png"
         style="width:100%; border: 1px solid rgba(0, 0, 0, 0.2);" /></figure>
-    <p>TODO: WRITE SOMETHING HERE</p>
+    <p>Reinforcement learning has started being implemented in a variety of fields such as robotics, text mining, trade execution, healthcare,  games and other fields. The novelty of reinforcement learning in comparison to other techniques is that it is highly adaptable as well as it can learn complex complex interactions through exploration.</p>
   </d-title>
   <d-byline></d-byline>
   <d-article>
     <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
     <h2>Introduction</h2>
     <p>Reinforcement Learning at its core attempts to map states to actions which maximize a numerical reward. Unlike supervised learning, which is trained by comparing labelled data to predicted data, and un-supervised learning, which attempts to group unlabelled data together, reinforcement learning learns by maximizing its accumulative long term reward by interacting with the environment.</p>
+    <aside>All notation come from <d-cite bibtex-key="suttonReinforcementLearningIntroduction2018"/></aside>
 
     <a class="marker" href="#section-1.1" id="section-1.1"><span>1.1</span></a>
     <h3>Markov Decision Process (MDP)</h3>
     <p>A Markov Decision Process provides a mathematical framework which can be used to model decision making and consists of the following:
       <ul>
-        <li><em>State (<d-math>s</d-math>)</em>: a tensor that can contain a set of vectors and/or scalars which are within the set <d-math>\mathcal{S^+}</d-math>. The state space can either be continuous or discrete. For discrete states, the set <d-math>\mathcal{S^+}</d-math> must contain a finite set of numbers. If the set <d-math>\mathcal{S^+}</d-math> contains a non-finite set of numbers, then the state space is continuous.</li>
-        <li><em>Reward (<d-math>r</d-math>)</em>: a scalar that represents a reward for taking the action <d-math>a</d-math> at state <d-math>s</d-math></li>
+        <li><em>State (<d-math>s</d-math>)</em>: a tensor that can contain a set of vectors and/or scalars which are within the set <d-math>\mathcal{S^+}</d-math><d-footnote><d-math>\mathcal{S^+}</d-math> is a set of all possible states including terminal states, whereas <d-math>\mathcal{S}</d-math> is a set of all possible states that is not including terminal states.</d-footnote>. The state space can either be continuous or discrete. For discrete states, the set <d-math>\mathcal{S^+}</d-math> must contain a finite set of numbers. If the set <d-math>\mathcal{S^+}</d-math> contains a non-finite set of numbers, then the state space is continuous.</li>
+        <li><em>Reward (<d-math>R</d-math>)</em>: a scalar that represents a reward for taking the action <d-math>a</d-math> at state <d-math>s</d-math></li>
         <li><em>Action (<d-math>a</d-math>)</em>: a tensor that can contain a set of vectors and/or scalars which are within the set <d-math>\mathcal{A}</d-math>. The action space is continuous when the set <d-math>\mathcal{A}</d-math> contains a non finite set of numbers, else if it contains a finite set of numbers, then the action space if discrete.</li>
+        <li><em>State Transition</em> (<d-math>p(s'|s,a)</d-math>): is the probability that the environment transitions from state <d-math>s</d-math> to state <d-math>s'</d-math> when taking the action <d-math>a</d-math>.</li>
       </ul>
     </p>
 
     <a class="marker" href="#section-1.2" id="section-1.2"><span>1.2</span></a>
-    <h3>TODO: TITLE</h3>
+    <h3>Core of Reinforcement Learning</h3>
     <p>Reinforcement learning consists of:
       <ul>
         <li><em>Environment</em>: A scenario which accepts any of the possible actions from the set <d-math>\mathcal{A}</d-math> and returns a state (<d-math>s</d-math>) from within the set <d-math>\mathcal{S^+}</d-math> and also a reward.</li>
-        <li><em>Agent</em>: an algorithm which performs an action from a set of action <d-math>\mathcal{A}</d-math> in response from a state.</li>
+        <li><em>Policy</em> (<d-math>\pi</d-math>): a policy is a function which performs an action from a set of actions <d-math>\mathcal{A}</d-math> depending on a given state <d-math>s</d-math>.</li>
+        <li><em>Agent</em>: consists of a policy (<d-math>\pi</d-math>) and an algorithm which attempts to update the policy to approach the optimal policy <d-math>\pi^*</d-math>.
         <li><em>Episode</em>: A sequence of states and actions that start when time <d-math>t</d-math> is 0 to when it reaches its terminal state at time <d-math>T</d-math>.</li>
-        <li><em>Policy</em> (<d-math>\pi</d-math>): </li>
-        <li><em>Discounted Accumulate Reward</em>: is a performance metric. A discounted performance metric is used to bound the sum to a finite value. Without the discount, for a continuing task with a final time step of <d-math>T = \infty</d-math>, the accumulative reward could be infinite. The agent will not be able to differentiate between a sub-optimal <d-math>G_t = \sum_{i=0}^{T-t}{\gamma^i r_{t+i}}</d-math></li>
+        <li><em>Discounted Accumulate Reward (<d-math>G_t</d-math>)</em>: is a performance metric. A discounted performance metric is used to bound the sum to a finite value. Without the discount, for a continuing task with a final time step of <d-math>T = \infty</d-math>, the accumulative reward could be infinite. The agent will not be able to differentiate between a sub-optimal policy with a <d-math>T = \infty</d-math> and the optimal policy <d-math>\pi^*</d-math>. As <d-math>0 < \gamma < 1</d-math>, <d-math>G_t</d-math> will be finite in the equation <d-math>G_t = \sum_{i=0}^{T-t}{\gamma^i R_{t+i}}</d-math>. This means there will be a difference between the sub-optimal policy and <d-math>\pi^*</d-math>.</li>
       </ul>
       The agent learns by interacting with the environment to discover which actions earn the maximum accumulate reward.
     </p>
