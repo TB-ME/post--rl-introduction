@@ -42,7 +42,7 @@
   }</script>
   </d-front-matter>
   <d-title>
-    <figure style="grid-column: page; margin: 1rem 0;"><img src="heading_image.png"
+    <figure style="grid-column: page; margin: 1rem 0;"><img src="images/heading_image.png"
         style="width:100%; border: 1px solid rgba(0, 0, 0, 0.2);" /></figure>
     <p>Reinforcement learning has started being implemented in a variety of fields such as robotics, text mining, trade execution, healthcare,  games and other fields. The novelty of reinforcement learning in comparison to other techniques is that it is highly adaptable as well as it can learn complex complex interactions through exploration.</p>
   </d-title>
@@ -74,11 +74,28 @@
         <li><em>Episode</em>: A sequence of states and actions that start when time <d-math>t</d-math> is 0 to when it reaches its terminal state at time <d-math>T</d-math>.</li>
         <li><em>Discounted Accumulate Reward (<d-math>G_t</d-math>)</em>: is a performance metric. A discounted performance metric is used to bound the sum to a finite value. Without the discount, for a continuing task with a final time step of <d-math>T = \infty</d-math>, the accumulative reward could be infinite. The agent will not be able to differentiate between a sub-optimal policy with a <d-math>T = \infty</d-math> and the optimal policy <d-math>\pi^*</d-math>. As <d-math>0 < \gamma < 1</d-math>, <d-math>G_t</d-math> will be finite in the equation <d-math>G_t = \sum_{i=0}^{T-t}{\gamma^i R_{t+i}}</d-math>. This means there will be a difference between the sub-optimal policy and <d-math>\pi^*</d-math>.</li>
       </ul>
-      The agent learns by interacting with the environment to discover which actions earn the maximum accumulate reward.
     </p>
+    <p>The agent learns by interacting with the environment to find the optimal policy <d-math>\pi^*</d-math> which performs the action that earns the maximum reward.</p>
 
     <a class="marker" href="#section-2" id="section-2"><span>2</span></a>
-    <h2></h2>
+    <h2>Types of Training</h2>
+    <ul>
+      <li><em>On-Policy</em>: learns from the experiences from the latest policy to update itself to a new policy</li>
+      <div style="margin:auto;display:block;text-align: center;"><img src="images/on-policy.png" style="width: 50%;"/><d-cite bibtex-key="levineOfflineReinforcementLearning2020"></d-cite></div>
+      <li><em>Off-Policy</em>: typically learns from the experiences of previous policies by storing experiences into a buffer. The buffer is sampled to update the current policy</li>
+      <div style="margin:auto;display:block;text-align: center;"><img src="images/off-policy.png" style="width: 50%;"/><d-cite bibtex-key="levineOfflineReinforcementLearning2020"></d-cite></div>
+      <li><em>Offline</em>: only uses data collected from other policies and does not further interact from the environment</li>
+      <div style="margin:auto;display:block;text-align: center;"><img src="images/offline.png" style="width: 75%;"/><d-cite bibtex-key="levineOfflineReinforcementLearning2020"></d-cite></div>
+    </ul>
+
+    <a class="marker" href="#section-2" id="section-3"><span>3</span></a>
+    <h2>Value Functions</h2>
+    <p>Most reinforcement learning algorithms involve estimating the value functions from states or state-action pairs. A value function is the expected long term reward from the current time step <d-math>t</d-math> with the current state <d-math>s_t</d-math> to the end of the episode. <d-math block> V(s) = \mathbb{E}[G_t | s_t] = \mathbb{E}[R_t + \gamma R_{t+1} + \gamma^2 R_{t+2} + ... | s_t]</d-math>
+      <ul>
+        <li><em>State Value Function</em> (V(s)): estimate the accumulate discounted reward-to-go from the current state. </li>
+        <li><em>Q-Value or State-Action Value Function</em> (Q(s, a)): </li>
+      </ul>
+  </p>
 
 
 
