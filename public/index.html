@@ -92,10 +92,14 @@
     <h2>Value Functions</h2>
     <p>Most reinforcement learning algorithms involve estimating the value functions from states or state-action pairs. A value function is the expected long term reward from the current time step <d-math>t</d-math> with the current state <d-math>s_t</d-math> to the end of the episode. <d-math block> V(s) = \mathbb{E}[G_t | s_t] = \mathbb{E}[R_t + \gamma R_{t+1} + \gamma^2 R_{t+2} + ... | s_t]</d-math>
       <ul>
-        <li><em>State Value Function</em> (V(s)): estimate the accumulate discounted reward-to-go from the current state. </li>
-        <li><em>Q-Value or State-Action Value Function</em> (Q(s, a)): </li>
-      </ul>
+        <li><em>State Value Function</em> (<d-math>V(s)</d-math>): estimates the accumulate discounted reward-to-go from the current state. Thus, the value function is also estimating what actions the policy will take and their rewards. A problem with <d-math>V(s)</d-math>, is that when the policy <d-math>\pi_k</d-math> is updated to <d-math>\pi_{k+1}</d-math>, the value function is still estimating for <d-math>\pi_k</d-math>. If there are non-negligible differences between <d-math>\pi_k</d-math> and <d-math>\pi_{k+1}</d-math>, <d-math>V(s)</d-math> will produce inaccurate value predictions. To avoid this issue, the value function is usually updated more frequently than the policy.</li>
+        <li><em>Q-Value or State-Action Value Function</em> (<d-math>Q(s, a)</d-math>): also estimates the discounted reward-to-go but with the state and action. When the action is used for estimation, the dimensionality is increased, meaning a decrease in sample efficiency.</li>
+    </ul>
   </p>
+  <p> The relationship between <d-math>V(s)</d-math> and <d-math>Q(s,a)</d-math> can be written as: <d-math block>V(s) = \sum_{a \in \mathcal{A}}{\pi(a|s) \cdot Q(s,a)} </d-math>
+  <p>The state value function is the probability of taking action <d-math>a</d-math> at state <d-math>s</d-math> multiplied by the Q-value for all possible actions.</p>
+  <d-math block>Q(s,a) = \sum_{s' \in \mathcal{S}}{p(s'|s,a) [R(s,a,s') + \gamma V(s')]}</d-math>
+  <p>The Q-value is the summation for possible states for <d-math>s'</d-math> of the probability of transitioning from state <d-math>s</d-math> to the next state <d-math>s'</d-math> when taking the action <d-math>a</d-math> multiplied by the reward plus the discounted state value function of state <d-math>s'</d-math></p>
 
 
 
