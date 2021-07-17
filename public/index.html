@@ -95,14 +95,50 @@
         <li><em>State Value Function</em> (<d-math>V(s)</d-math>): estimates the accumulate discounted reward-to-go from the current state. Thus, the value function is also estimating what actions the policy will take and their rewards. A problem with <d-math>V(s)</d-math>, is that when the policy <d-math>\pi_k</d-math> is updated to <d-math>\pi_{k+1}</d-math>, the value function is still estimating for <d-math>\pi_k</d-math>. If there are non-negligible differences between <d-math>\pi_k</d-math> and <d-math>\pi_{k+1}</d-math>, <d-math>V(s)</d-math> will produce inaccurate value predictions. To avoid this issue, the value function is usually updated more frequently than the policy.</li>
         <li><em>Q-Value or State-Action Value Function</em> (<d-math>Q(s, a)</d-math>): also estimates the discounted reward-to-go but with the state and action. When the action is used for estimation, the dimensionality is increased, meaning a decrease in sample efficiency.</li>
     </ul>
-  </p>
-  <p> The relationship between <d-math>V(s)</d-math> and <d-math>Q(s,a)</d-math> can be written as: <d-math block>V(s) = \sum_{a \in \mathcal{A}}{\pi(a|s) \cdot Q(s,a)} </d-math>
-  <p>The state value function is the probability of taking action <d-math>a</d-math> at state <d-math>s</d-math> multiplied by the Q-value for all possible actions.</p>
-  <d-math block>Q(s,a) = \sum_{s' \in \mathcal{S}}{p(s'|s,a) [R(s,a,s') + \gamma V(s')]}</d-math>
-  <p>The Q-value is the summation for possible states for <d-math>s'</d-math> of the probability of transitioning from state <d-math>s</d-math> to the next state <d-math>s'</d-math> when taking the action <d-math>a</d-math> multiplied by the reward plus the discounted state value function of state <d-math>s'</d-math></p>
+    </p>
+    <p> The relationship between <d-math>V(s)</d-math> and <d-math>Q(s,a)</d-math> can be written as: <d-math block>V(s) = \sum_{a \in \mathcal{A}}{\pi(a|s) \cdot Q(s,a)} </d-math>
+    <p>The state value function is the probability of taking action <d-math>a</d-math> at state <d-math>s</d-math> multiplied by the Q-value for all possible actions.</p>
+    <d-math block>Q(s,a) = \sum_{s' \in \mathcal{S}}{p(s'|s,a) [R(s,a,s') + \gamma V(s')]}</d-math>
+    <p>The Q-value is the summation for possible states for <d-math>s'</d-math> of the probability of transitioning from state <d-math>s</d-math> to the next state <d-math>s'</d-math> when taking the action <d-math>a</d-math> multiplied by the reward plus the discounted state value function of state <d-math>s'</d-math>.</p>
+    <p>Without having access to the state transition <d-math>p(s'|s,a)</d-math>, the Q-value function should be used. If the state transition is not known, the gradient cannot be calculated between the value function and the policy.</p>
+    <a class="marker" href="#section-4" id="section-4"><span>4</span></a>
+    <h2>Learning Methods</h2>
+
+    <a class="marker" href="#section-4.1" id="section-4.1"><span>4.1</span></a>
+    <h3>Monte Carlo Learning</h3>
+    <p>Monte carlo learning involves generating samples for an entire episode and using those samples to update the policy. The accumulative discounted reward-to-go is calculated by stepping backwards through the generated episode.</p>
+    <d-math block>
+      G_t = \begin{cases}
+        R_t + \gamma G_{t+1} &\text{if } t < T\\
+        R_t &\text{if } t = T
+      \end{cases}
+    </d-math>
+    <p>When the time reaches <d-math>T</d-math>, <d-math>G_t</d-math> becomes known. The main problem with monte carlo learning is that the whole episode is required before the policy can be updated. The monte carlo algorithm can be summarized as:</p>
+    <d-code language="python">
+      \begin{document}
+\title{LaTeX Typesetting By Example}
+\author{Phil Farrell\\
+Stanford University School of Earth Sciences}
+\renewcommand{\today}{November 2, 1994}
+\maketitle
+This article demonstrates a basic set of LaTeX formatting commands.
+Compare the typeset output side-by-side with the input document.
+    </d-code>
+
+    <a class="marker" href="#section-4.2" id="section-4.2"><span>4.2</span></a>
+    <h3>Temporal-Difference Learning</h3>
+    <p>Temporal difference (TD) learning similar to monte carlo learning, learns through generate experiences. TD learning differs from monte carlo as it is able to learn at every time step. This involves modifying the monte carlo value function update from: </p>
+    <d-math block> V(S_t) \leftarrow V(S_t) + \alpha [G_t - V(S_t)]</d-math>
+    <p>where <d-math>\alpha</d-math> is a constant step size. <d-math>G_t</d-math> is replaced with the reward and the value estimate of the next step.</p>
+    <d-math block> V(S_t) \leftarrow V(S_t) + \alpha [R_{t+1} + \gamma V(S_{t+1}) - V(S_t)]</d-math>
+    <p>Because this method relies on previous estimated values which is commonly referred to as <em>bootstrapping</em>. The above method, which is the simplest TD method is called TD(0) because it requires only a single step.  </p>
+    <a class="marker" href="#section-4.3" id="section-4.3"><span>4.3</span></a>
+    <h3>Eligibility Traces</h3>
 
 
-
+    <a class="marker" href="#section-5" id="section-5"><span>5</span></a>
+    <h2>Exploration vs Exploitation</h2>
+    <p>randomness is required because a deterministic policy will on follow one single state-action</p>
 
 
     <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
