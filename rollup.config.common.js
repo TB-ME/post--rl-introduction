@@ -27,9 +27,7 @@ const defaultConfig = {
       browser: true
     }),
     commonjs(),
-    string({
-      include: ["**/*.txt", "**/*.svg", "**/*.html", "**/*.css", "**/*.base64"]
-    })
+    string({ include: ["**/*.txt", "**/*.svg", "**/*.html", "**/*.css", "**/*.base64"] })
   ]
 };
 

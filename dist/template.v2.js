@@ -5562,7 +5562,7 @@ d-references {
 
     addEventListener(eventName, callback) {
       super.addEventListener(eventName, callback);
-      // if we had already dispatched something while presumingly no one was listening, we do so again
+      // if we had already dispatched something while presumably no one was listening, we do so again
       // debugger
       if (eventName === 'ready') {
         if (Figure.readyQueue.indexOf(this) !== -1) {

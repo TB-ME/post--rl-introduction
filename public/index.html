@@ -114,16 +114,11 @@
       \end{cases}
     </d-math>
     <p>When the time reaches <d-math>T</d-math>, <d-math>G_t</d-math> becomes known. The main problem with monte carlo learning is that the whole episode is required before the policy can be updated. The monte carlo algorithm can be summarized as:</p>
-    <d-code language="python">
-      \begin{document}
-\title{LaTeX Typesetting By Example}
-\author{Phil Farrell\\
-Stanford University School of Earth Sciences}
-\renewcommand{\today}{November 2, 1994}
-\maketitle
-This article demonstrates a basic set of LaTeX formatting commands.
-Compare the typeset output side-by-side with the input document.
+    <d-code language="python" block>
+      def hello():
+        pass
     </d-code>
+    <p>The main problem of Monte Carlo learning is that it can only learn at the end of the episode. Learning can be greatly slowed when episodes have long run-times.</p>
 
     <a class="marker" href="#section-4.2" id="section-4.2"><span>4.2</span></a>
     <h3>Temporal-Difference Learning</h3>
@@ -131,10 +126,16 @@ Compare the typeset output side-by-side with the input document.
     <d-math block> V(S_t) \leftarrow V(S_t) + \alpha [G_t - V(S_t)]</d-math>
     <p>where <d-math>\alpha</d-math> is a constant step size. <d-math>G_t</d-math> is replaced with the reward and the value estimate of the next step.</p>
     <d-math block> V(S_t) \leftarrow V(S_t) + \alpha [R_{t+1} + \gamma V(S_{t+1}) - V(S_t)]</d-math>
-    <p>Because this method relies on previous estimated values which is commonly referred to as <em>bootstrapping</em>. The above method, which is the simplest TD method is called TD(0) because it requires only a single step.  </p>
+    <p>Because this method relies on previous estimated values which is commonly referred to as <em>bootstrapping</em>. The above method, which is the simplest TD method is called TD(0) because it requires only a single step. TD(0) is summarized as: </p>
+    <d-code language="python" block></d-code>
+    <p>A major problem with TD(0) is that it only samples one step. This problem is similar to traditional supervised learning when the batch size is set to 1. This usually results in both the policy and the value function to be over-fitted to specific scenarios, ultimately leading to a policy with low bias and high variance.</p>
     <a class="marker" href="#section-4.3" id="section-4.3"><span>4.3</span></a>
     <h3>Eligibility Traces</h3>
-
+    <p>Eligibility traces are a hybrid between TD and Monte Carlo Learning. The most popular method is TD(<d-math>\lambda</d-math>) which is more commonly referred to as <em>n</em>-Step TD prediction. Instead of only sampling from a single time step, this method samples from <em>n</em> steps. The value function is updated to: </p>
+    <d-math block> V(S_t) \leftarrow V(S_t) + \alpha [\sum_{i=0}^{n}{\gamma^i R_{t+i} + \gamma^{i+1} V(S_{t+i})}] </d-math>
+    <p>This methods requires samples from <d-math>\lambda</d-math>-steps ahead of the current time-step, or looking back <d-math>\lambda</d-math>-steps. TD(<d-math>\lambda</d-math>) becomes TD(0) when <d-math>\lambda</d-math> is 0, if <d-math>\lambda</d-math> becomes <d-math>T</d-math> then it behaves exactly as monte carlo learning. TD(<d-math>\lambda</d-math>) can be described as: </p>
+    <d-code language="python" block></d-code>
+    <p>Eligibility traces require tuning for <d-math>\lambda</d-math> for optimal training times as it is both environment and step size dependant.</p>
 
     <a class="marker" href="#section-5" id="section-5"><span>5</span></a>
     <h2>Exploration vs Exploitation</h2>
